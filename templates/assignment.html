@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Assignments for Course {{ i }}</title>
+
+{% block content %}
+<h1> {% block title %} Assignments to do (Course {{ i }}) {% endblock %}</h1>
+{% for d in data %}
+<p>
+	{{ d['name'] }} - {{ d['due_at'] }}	
+</p>
+{% endfor %}
+{% endblock %}
+

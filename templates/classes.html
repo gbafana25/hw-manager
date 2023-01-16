@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<title>Classes</title>
+
+{% block content %}
+<h1> {% block title %} Currently Enrolled Classes {% endblock %}</h1>
+{% for d in data %}
+<p>
+	{{ d['name'] }} - {{ d['id'] }}	
+	<a href="assignments/{{ d['id'] }}">assignments</a>
+</p>
+{% endfor %}
+{% endblock %}
+
