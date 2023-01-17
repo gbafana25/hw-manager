@@ -4,7 +4,7 @@ import requests
 from flask import Flask, request, render_template, make_response 
 from datetime import datetime, date, timezone
 from dateutil import tz
-#from zoneinfo import ZoneInfo
+import json
 
 import canvas
 
@@ -53,6 +53,24 @@ def classes_json():
 	data = canvas.requestBuilder("courses", t, u)	
 	return data
 
+@app.route("/add-todo", methods=['GET', 'POST'])
+def add_todo():
+	if request.method == 'GET':
+		return render_template("add-todo.html")	
+	else:
+		r = make_response("TODO item submitted")
+		n = {'name':request.form['name'], 'description':request.form['description']}
+		try:
+			t = json.loads(request.cookies.get('todo'))
+			t['todo'].append(n)
+			r.set_cookie('todo', json.dumps(t))
+		except:
+			base = json.loads('{"todo":[]}')
+			base['todo'].append(n)
+			r.set_cookie('todo', json.dumps(base))
+		return r
+
+
 @app.route("/classes", methods=['GET'])
 def getClasses():
 	u = request.cookies.get('url')
@@ -85,7 +103,7 @@ def TokenPage():
 
 @app.route("/", methods=['GET'])
 def Home():
-	return "<h1>HW Planner</h1>"
+	return render_template("home.html") 
 
 
 if __name__ == "__main__":

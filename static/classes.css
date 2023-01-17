@@ -14,7 +14,7 @@ a {
 	padding: 20px;
 }
 
-
+.back_button:hover,
 .back_button {
 	text-align: left;
 	padding-right: 80px;
@@ -23,6 +23,7 @@ a {
 	font-size: 20px;
 }
 
+.setup_button:hover,
 .setup_button {
 	text-align: left;
 	padding-right: 80px;
@@ -52,6 +53,7 @@ header {
 .card {
 	box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, .5);
 	text-align: left;
+	color: black;
 	padding: 10px;
 	margin-right: 50%;	
 	text-decoration: none;	

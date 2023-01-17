@@ -8,11 +8,11 @@ a {
 	text-decoration: none;	
 }
 
+
 .bar {
 	background-color: #CF1E1E;
 	padding: 20px;
 }
-
 
 .back_button:hover,
 .back_button {
@@ -44,21 +44,23 @@ header {
 	text-align: center;
 }
 
+.btn {
+	padding: 15px;
+	margin: 10px;
+}
+
 .main {
 	padding-left: 50px;
 	padding-top: 20px;
 }
 
-.card {
-	box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, .5);
-	text-align: left;
-	padding: 10px;
-	margin-right: 50%;	
-	text-decoration: none;	
-
+.todo_form {
+	padding: 20px;	
+	align-items: center;
 }
 
-.card:hover {
-	color: #FFFF;
-	background-color: #FFF0;
+.labels {
+	padding: 20px;
 }
+
+

@@ -2,10 +2,11 @@
 
 <title>Classes</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="/static/assignment.css"/>
+<link rel="stylesheet" href="/static/classes.css"/>
 <link href="//fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css">
 
 <nav class='bar'>
+<a href="/" class="back_button">home</a>
 <a href="/classes" class="back_button">classes</a>
 <a href="/setup" class="setup_button">setup</a>
 </nav>
@@ -13,7 +14,7 @@
 <div class='main'>
 {% block content %}
 {% for d in data %}
-<p class='card'><a href="assignments/{{ d['id'] }}">
+<p class='card'><a style='color: black' href="assignments/{{ d['id'] }}">
 	{{ d['name'] }}
 </a> </p>
 {% endfor %}
