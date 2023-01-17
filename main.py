@@ -36,7 +36,6 @@ def getAssignments(id):
 			if data[d]['due_at'] != None:
 				shorter = datetime.strptime(data[d]['due_at'], "%Y-%m-%dT%H:%M:%S%z").astimezone(tz.gettz("US/Chicago"))
 				#print(shorter.year, date.today().year)
-				print(data[d]['due_at'])
 				if upcoming(shorter.month) == False:
 					data.pop(d)	
 				else:

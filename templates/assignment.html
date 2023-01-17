@@ -5,11 +5,11 @@
 <link rel="stylesheet" href="/static/assignment.css"/>
 <link href="//fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css">
 
-<header >{% block title %} {{ name }} {% endblock %}</header>
 <nav class='bar'>
 <a href="/classes" class="back_button">classes</a>
 <a href="/setup" class="setup_button">setup</a>
 </nav>
+<header >{% block title %} {{ name }} {% endblock %}</header>
 <div class='main'>
 {% block content %}
 {% for d in data %}
@@ -17,7 +17,6 @@
 	{{ d['name'] }} - {{ d['due_at'] }}	
 </p></a>
 {% endfor %}
-</ul>
 {% endblock %}
 </div>
 
