@@ -1,0 +1,63 @@
+* {
+	font-family: "Share Tech Mono", monospace;
+	color: #474844;	
+}
+
+
+a {
+	text-decoration: none;	
+}
+
+
+.bar {
+	background-color: #CF1E1E;
+	padding: 20px;
+}
+
+
+.back_button {
+	text-align: left;
+	padding-right: 80px;
+	color: #FFFF;	
+	margin: 0 auto;
+	font-size: 20px;
+}
+
+.setup_button {
+	text-align: left;
+	padding-right: 80px;
+	color: #FFFF;	
+	margin: 0 auto;
+	font-size: 20px;e
+}
+
+
+
+header {
+	background-color: #CF1E1E; 
+	color: white;
+	padding-bottom: 40px;
+	padding-top: 15px;
+	padding-left: 0;
+	font-size: 200%;
+	text-align: center;
+}
+
+.main {
+	padding-left: 50px;
+	padding-top: 20px;
+}
+
+.card {
+	box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, .5);
+	text-align: left;
+	padding: 10px;
+	margin-right: 50%;	
+	text-decoration: none;	
+
+}
+
+.card:hover {
+	color: #FFFF;
+	background-color: #FFF0;
+}

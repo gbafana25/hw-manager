@@ -11,18 +11,48 @@ import canvas
 
 app = Flask(__name__)
 
+def upcoming(month):
+	if date.today().month <= month:
+		return True 
+	else:
+		return False 
+
+def getCourseNameFromId(id):	
+	u = request.cookies.get('url')
+	t = request.cookies.get('token')
+	data = canvas.requestBuilder("courses/"+id, t, u)
+	return data['name']
+
 @app.route("/assignments/<id>", methods=['GET'])
 def getAssignments(id):
 	u = request.cookies.get('url')
 	t = request.cookies.get('token')
+	c_name = getCourseNameFromId(id)
 	data = canvas.requestBuilder("courses/"+id+"/assignments", t, u)
+	#print(data)
 	times = []
-	for d in data:
-		if d['due_at'] != None:
-			shorter = datetime.strptime(d['due_at'], "%Y-%m-%dT%H:%M:%S%z").astimezone(tz.gettz("US/Chicago"))
-			#times.append(shorter.month+"/"+shorter.day)
-			d['due_at'] = str(shorter.month)+"/"+str(shorter.day)
-	return render_template("assignment.html", data=data, i=id)
+	for d in range(len(data)):
+		try:
+			if data[d]['due_at'] != None:
+				shorter = datetime.strptime(data[d]['due_at'], "%Y-%m-%dT%H:%M:%S%z").astimezone(tz.gettz("US/Chicago"))
+				#print(shorter.year, date.today().year)
+				print(data[d]['due_at'])
+				if upcoming(shorter.month) == False:
+					data.pop(d)	
+				else:
+					data[d]['due_at'] = str(shorter.month)+"/"+str(shorter.day)
+				
+		except IndexError:
+			pass
+	return render_template("assignment.html", data=data, name=c_name)
+
+
+@app.route("/classes-raw")
+def classes_json():
+	u = request.cookies.get('url')
+	t = request.cookies.get('token')
+	data = canvas.requestBuilder("courses", t, u)	
+	return data
 
 @app.route("/classes", methods=['GET'])
 def getClasses():
