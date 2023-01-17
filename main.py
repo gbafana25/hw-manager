@@ -17,6 +17,14 @@ def upcoming(month):
 	else:
 		return False 
 
+def getTodoList():
+	try:
+		tl = json.loads(request.cookies.get('todo'))
+		return tl['todo']
+	except:
+		print("No todo list found")
+		return None
+
 def getCourseNameFromId(id):	
 	u = request.cookies.get('url')
 	t = request.cookies.get('token')
@@ -83,7 +91,8 @@ def getClasses():
 				data.pop(d)
 		except IndexError:
 			pass
-	return render_template("classes.html", data=data)
+	tl = getTodoList()
+	return render_template("classes.html", data=data, tlist=tl)
 
 
 
