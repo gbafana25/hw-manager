@@ -11,13 +11,14 @@
 <a href="/setup" class="setup_button">setup</a>
 </nav>
 <header >{% block title %} {{ name }} {% endblock %}</header>
-<div class='main'>
+
 {% block content %}
+<div class='main'>
 {% for d in data %}
 <p class='card'><a style='color: black' href="{{ d['html_url'] }}">
 	{{ d['name'] }} - {{ d['due_at'] }}	
 </p></a>
 {% endfor %}
-{% endblock %}
 </div>
+{% endblock %}
 

@@ -8,14 +8,21 @@
 <nav class='bar'>
 <a href="/classes" class="back_button">classes</a>
 <a href="/setup" class="setup_button">setup</a>
+<a href="/add-todo" class="setup_button">add item</a>
 </nav>
-<header>Homework planner</header>
+<header>Homework planner/TODO list</header>
 
 <div class='main'>
 <p>
+{% block content %}
+{% for l in tlist %}
+<div class='list'>
 <ul>
-	<li class='info'>Save a Canvas API token and the url in the setup menu.</li>
-	<li class='info'>Cookies are erased when the browser closes.</li>
+	<li class='todo_item'>{{ l }}</li>
 </ul>
-</p>
+</div>
+{% endfor %}
+{% endblock %}
+<p class='info'>Save a Canvas API token and the url in the setup menu.</p>
+<p class='info'>Cookies are erased when the browser closes.</p>
 </div>

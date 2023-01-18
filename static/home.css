@@ -9,13 +9,13 @@ a {
 }
 
 ul {
-	list-style: none;
+	list-style: square;
 }
 
 .info {
 	text-align: center;
 	padding: 30px;
-	font-size: 30px;
+	font-size: 25px;
 
 }
 
@@ -27,6 +27,7 @@ ul {
 .main {
 	padding-left: 50px;
 	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .back_button:hover,
@@ -56,3 +57,20 @@ header {
 	font-size: 200%;
 	text-align: center;
 }
+
+
+.todo_form {
+	padding: 20px;	
+	align-items: center;
+}
+
+.labels {
+	padding: 20px;
+}
+
+.list {
+	padding-top: 30px;
+	text-align: center;
+	font-size: 40px;
+}
+

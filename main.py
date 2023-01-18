@@ -23,7 +23,7 @@ def getTodoList():
 		return tl['todo']
 	except:
 		print("No todo list found")
-		return None
+		return [] 
 
 def getCourseNameFromId(id):	
 	u = request.cookies.get('url')
@@ -67,7 +67,7 @@ def add_todo():
 		return render_template("add-todo.html")	
 	else:
 		r = make_response("TODO item submitted")
-		n = {'name':request.form['name'], 'description':request.form['description']}
+		n = request.form['item']
 		try:
 			t = json.loads(request.cookies.get('todo'))
 			t['todo'].append(n)
@@ -91,8 +91,8 @@ def getClasses():
 				data.pop(d)
 		except IndexError:
 			pass
-	tl = getTodoList()
-	return render_template("classes.html", data=data, tlist=tl)
+	#tl = getTodoList()
+	return render_template("classes.html", data=data)
 
 
 
@@ -106,13 +106,15 @@ def setToken():
 	r.set_cookie('url', request.form['url'])
 	return r
 
+
 @app.route("/setup")
 def TokenPage():
 	return render_template("setup.html")
 
 @app.route("/", methods=['GET'])
 def Home():
-	return render_template("home.html") 
+	lt = getTodoList()
+	return render_template("home.html", tlist=lt) 
 
 
 if __name__ == "__main__":

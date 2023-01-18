@@ -12,20 +12,13 @@
 </nav>
 <header> {% block title %} Currently Enrolled Classes {% endblock %}</header>
 
+<div class='main'>
 {% block content %}
-{% for l in tlist %}
-<div class='list'>
-	<p class='todo_item'>{{ l['name'] }} - {{ l['description'] }}</p>
-</div>
-{% endfor %}
-
-<div>
 {% for d in data %}
 	<p class='card'><a style='color: black' href="assignments/{{ d['id'] }}">
 		{{ d['name'] }}
 	</a></p>
-</div>
 {% endfor %}
-
 {% endblock %}
+</div>
 
