@@ -111,24 +111,20 @@ def getClasses():
 	r = []
 	try:
 		f = json.loads(request.cookies.get('removed-courses'))
-		for s in f['removed-courses']:
-			r.append(s)
+		r = f['removed-courses']
 	except:
 		pass
 	data = canvas.requestBuilder("courses", t, u)	
 	for d in range(len(data)):	
 		try:
-			#print(list(data[d].keys()))
 			# course access is restricted
+			#print(len(list(data[d].keys())))
 			if len(list(data[d].keys())) == 2:
 				data.pop(d)
 			elif str(data[d]['id']) in r:
-				#print(data[d]['name'])
 				data.pop(d)
 		except IndexError:
 			pass
-	#tl = getTodoList()
-	
 	return render_template("classes.html", data=data)
 
 
