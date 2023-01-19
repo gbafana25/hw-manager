@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import requests
-from flask import Flask, request, render_template, make_response 
+from flask import Flask, request, render_template, make_response, redirect, url_for 
 from datetime import datetime, date, timezone
 from dateutil import tz
 import json
@@ -25,11 +25,15 @@ def getTodoList():
 		print("No todo list found")
 		return [] 
 
+
+
 def getCourseNameFromId(id):	
 	u = request.cookies.get('url')
 	t = request.cookies.get('token')
 	data = canvas.requestBuilder("courses/"+id, t, u)
 	return data['name']
+
+
 
 @app.route("/assignments/<id>", methods=['GET'])
 def getAssignments(id):
@@ -54,7 +58,7 @@ def getAssignments(id):
 	return render_template("assignment.html", data=data, name=c_name)
 
 
-@app.route("/classes-raw")
+#@app.route("/classes-raw")
 def classes_json():
 	u = request.cookies.get('url')
 	t = request.cookies.get('token')
@@ -66,17 +70,25 @@ def add_todo():
 	if request.method == 'GET':
 		return render_template("add-todo.html")	
 	else:
-		r = make_response("TODO item submitted")
+		r = redirect("/")
 		n = request.form['item']
 		try:
 			t = json.loads(request.cookies.get('todo'))
 			t['todo'].append(n)
-			r.set_cookie('todo', json.dumps(t))
+			r.set_cookie('todo', json.dumps(t), max_age=60*60*24*365)
 		except:
 			base = json.loads('{"todo":[]}')
 			base['todo'].append(n)
-			r.set_cookie('todo', json.dumps(base))
+			r.set_cookie('todo', json.dumps(base), max_age=60*60*24*365)
 		return r
+
+@app.route("/remove-todo/<item>")
+def remove_todo(item):
+	t = json.loads(request.cookies.get('todo'))
+	t['todo'].remove(item)
+	r = redirect("/")
+	r.set_cookie('todo', json.dumps(t), max_age=60*60*24*365)
+	return r
 
 
 @app.route("/classes", methods=['GET'])
@@ -92,18 +104,16 @@ def getClasses():
 		except IndexError:
 			pass
 	#tl = getTodoList()
+	
 	return render_template("classes.html", data=data)
 
 
 
 @app.route("/set-vars", methods=['POST'])
-def setToken():
-	if request.method != 'POST':
-		return "<h1>Request Error</h1>"
-	
-	r = make_response("Token saved")
-	r.set_cookie('token', request.form['token'])
-	r.set_cookie('url', request.form['url'])
+def setToken():	
+	r = redirect("/") 
+	r.set_cookie('token', request.form['token'], max_age=60*60*24*365)
+	r.set_cookie('url', request.form['url'], max_age=60*60*24*365)
 	return r
 
 

@@ -8,7 +8,7 @@
 <nav class='bar'>
 <a href="/classes" class="back_button">classes</a>
 <a href="/setup" class="setup_button">setup</a>
-<a href="/add-todo" class="setup_button">add item</a>
+<a href="/add-todo" class="setup_button">add todo item</a>
 </nav>
 <header>Homework planner/TODO list</header>
 
@@ -18,11 +18,11 @@
 {% for l in tlist %}
 <div class='list'>
 <ul>
-	<li class='todo_item'>{{ l }}</li>
+	<li class='todo_item'><a href="/remove-todo/{{ l }}" method='post'>{{ l }}</a></li>
 </ul>
 </div>
 {% endfor %}
 {% endblock %}
 <p class='info'>Save a Canvas API token and the url in the setup menu.</p>
-<p class='info'>Cookies are erased when the browser closes.</p>
+<p class='info'>Click on todo list items in order to remove them.</p>
 </div>
