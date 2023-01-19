@@ -15,9 +15,11 @@
 <div class='main'>
 {% block content %}
 {% for d in data %}
+	<div class='entry'>
 	<p class='card'><a style='color: black' href="assignments/{{ d['id'] }}">
 		{{ d['name'] }}
-	</a></p>
+	</a></p><a href="/remove-course/{{ d['id'] }}">remove</a>
+	</div>
 {% endfor %}
 {% endblock %}
 </div>

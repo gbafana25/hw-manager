@@ -57,8 +57,20 @@ def getAssignments(id):
 			pass
 	return render_template("assignment.html", data=data, name=c_name)
 
+@app.route("/remove-course/<id>")
+def removeClasses(id):
+	r = redirect("/classes")
+	try:
+		t = json.loads(request.cookies.get('removed-courses'))
+		t['removed-courses'].append(id)
+		r.set_cookie('removed-courses', json.dumps(t), max_age=60*60*24*365)
+	except:
+		base = json.loads('{"removed-courses":[]}')
+		base['removed-courses'].append(id)
+		r.set_cookie('removed-courses', json.dumps(base), max_age=60*60*24*365)
+	return r
 
-#@app.route("/classes-raw")
+@app.route("/classes-raw")
 def classes_json():
 	u = request.cookies.get('url')
 	t = request.cookies.get('token')
@@ -82,6 +94,7 @@ def add_todo():
 			r.set_cookie('todo', json.dumps(base), max_age=60*60*24*365)
 		return r
 
+
 @app.route("/remove-todo/<item>")
 def remove_todo(item):
 	t = json.loads(request.cookies.get('todo'))
@@ -95,11 +108,22 @@ def remove_todo(item):
 def getClasses():
 	u = request.cookies.get('url')
 	t = request.cookies.get('token')
+	r = []
+	try:
+		f = json.loads(request.cookies.get('removed-courses'))
+		for s in f['removed-courses']:
+			r.append(s)
+	except:
+		pass
 	data = canvas.requestBuilder("courses", t, u)	
 	for d in range(len(data)):	
 		try:
+			#print(list(data[d].keys()))
 			# course access is restricted
 			if len(list(data[d].keys())) == 2:
+				data.pop(d)
+			elif str(data[d]['id']) in r:
+				#print(data[d]['name'])
 				data.pop(d)
 		except IndexError:
 			pass

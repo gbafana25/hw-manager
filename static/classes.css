@@ -6,6 +6,7 @@
 
 a {
 	text-decoration: none;	
+	color: #474844;	
 }
 
 
@@ -45,8 +46,12 @@ header {
 }
 
 .main {
-	padding-left: 180px;
+	padding-left: 100px;
 	padding-top: 20px;
+}
+
+.entry {
+	display: flex;
 }
 
 
@@ -55,7 +60,7 @@ header {
 	text-align: left;
 	color: black;
 	padding: 10px;
-	margin-right: 40%;	
+	margin-right: 30px;	
 	text-decoration: none;	
 
 }
