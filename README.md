@@ -1,7 +1,7 @@
 # hw-manager
 
 Flask-based frontend to view Canvas assignments.
-[Try here](stingray-app-ayu4b.ondigitalocean.app/)
+[Try here](https://stingray-app-ayu4b.ondigitalocean.app/)
 
 ## Stored Cookies
 - `token`: Canvas API token
